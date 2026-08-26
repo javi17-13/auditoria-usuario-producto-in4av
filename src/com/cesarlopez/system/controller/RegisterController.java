@@ -42,7 +42,7 @@ public class RegisterController implements Initializable {
 
     private AlertInformation alertInfo = new AlertInformation();
     private Validations validate = new Validations();
-
+    private UserService
     @FXML
     public void onCancelRegister(MouseEvent event) {
         ViewFactory viewFacto = new ViewFactory();
@@ -116,4 +116,14 @@ public class RegisterController implements Initializable {
 
     }
 
+      UserStatus status = userService.createUser();
+      
+      switch (status){
+          case USER_CREATED:
+              System.out.println("se creo el usuario");
+          case ERROR_USER_CREATE ->
+               System.out.println("se creo el usuario");
+              default ->
+      
+      }
 }
