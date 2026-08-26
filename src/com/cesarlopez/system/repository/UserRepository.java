@@ -7,7 +7,7 @@ package com.cesarlopez.system.repository;
 import com.cesarlopez.system.model.User;
 import java.sql.CallableStatement;
 import com.cesarlopez.system.config.ConexionDB;
- 
+ import java.sql.SQLException;
 public class UserRepository implements UserInterface {
  
     private CallableStatement callSP;
@@ -16,7 +16,7 @@ public class UserRepository implements UserInterface {
     @Override
     public void create(User user) {
         try {
-            callSP = conexionDB.getConnection().prepareCall("{call sp_create_users(?,?,?,?,?)}");
+            callSP = conexionDB.getConnection().prepareCall("{sp_create_users(?,?,?,?,?)}");
             callSP.setString(1, user.getName());
             callSP.setString(2, user.getLastname());
             callSP.setString(3, user.getEmail());
@@ -24,7 +24,10 @@ public class UserRepository implements UserInterface {
             callSP.setString(5, user.getPassword());
             callSP.execute();
             callSP.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Error al crear usuario repository");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -14,8 +14,6 @@ import com.mysql.cj.jdbc.CallableStatement;
  */
 public interface UserInterface {
     
-    
-    
     void create (User user);
     
 }

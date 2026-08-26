@@ -48,7 +48,7 @@
             <TextField fx:id="txtLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <PasswordField fx:id="pwdPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <PasswordField fx:id="pwdConfirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <PasswordField fx:id="pwdconfirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox prefHeight="100.0" prefWidth="200.0">
