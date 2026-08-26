@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 
 public class ViewFactory {
 
+    
+    
     private final String PATH_VIEWS = "/com/cesarlopez/system/view/";
 
     public Scene loadFileFXML(String nameFile, int width, int height) {
