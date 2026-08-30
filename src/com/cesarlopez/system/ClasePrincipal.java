@@ -8,7 +8,7 @@ import com.cesarlopez.system.utils.ViewFactory;
 public class ClasePrincipal extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args); 
     }
     
     @Override

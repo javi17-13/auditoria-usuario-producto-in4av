@@ -4,6 +4,8 @@
  */
 package com.cesarlopez.system.controller;
 
+import com.cesarlopez.system.service.UserService;
+import com.cesarlopez.system.service.UserStatus;
 import com.cesarlopez.system.utils.AlertInformation;
 import com.cesarlopez.system.utils.Validations;
 import com.cesarlopez.system.utils.ViewFactory;
@@ -42,7 +44,8 @@ public class RegisterController implements Initializable {
 
     private AlertInformation alertInfo = new AlertInformation();
     private Validations validate = new Validations();
-    private UserService
+    private UserService userService = new UserService();
+    
     @FXML
     public void onCancelRegister(MouseEvent event) {
         ViewFactory viewFacto = new ViewFactory();
@@ -109,21 +112,21 @@ public class RegisterController implements Initializable {
             return;
         }
 
+        UserStatus status = userService.createUser(user, name, lastName, email, password);
+
+        switch (status) {
+            case USER_CREATED ->
+                System.out.println("se creo el usuario");
+            case ERROR_USER_CREATE ->
+                System.out.println("se creo el usuario");
+            default ->
+                System.out.println("error desconocido ");
+        }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-
-      UserStatus status = userService.createUser();
-      
-      switch (status){
-          case USER_CREATED:
-              System.out.println("se creo el usuario");
-          case ERROR_USER_CREATE ->
-               System.out.println("se creo el usuario");
-              default ->
-      
-      }
 }
