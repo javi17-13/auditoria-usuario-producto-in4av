@@ -26,4 +26,12 @@ public class UserService {
         }
     
     }
+    
+    public User findUser(String login){
+        return userRepo.findByUserOrEmail(login);
+    }
+    
+    public boolean existsUser(String login){
+        return userRepo.findByUserOrEmail(login) != null;
+    }
 }

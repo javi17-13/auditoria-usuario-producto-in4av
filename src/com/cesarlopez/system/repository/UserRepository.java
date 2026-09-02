@@ -7,6 +7,7 @@ package com.cesarlopez.system.repository;
 import com.cesarlopez.system.model.User;
 import java.sql.CallableStatement;
 import com.cesarlopez.system.config.ConexionDB;
+ import java.sql.ResultSet;
  import java.sql.SQLException;
 public class UserRepository implements UserInterface {
  
@@ -16,7 +17,7 @@ public class UserRepository implements UserInterface {
     @Override
     public void create(User user) {
         try {
-            callSP = conexionDB.getConnection().prepareCall("{sp_create_users(?,?,?,?,?)}");
+            callSP = conexionDB.getConnection().prepareCall("{call sp_create_users(?,?,?,?,?)}");
             callSP.setString(1, user.getName());
             callSP.setString(2, user.getLastname());
             callSP.setString(3, user.getEmail());
@@ -29,5 +30,31 @@ public class UserRepository implements UserInterface {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    
+    public User findByUserOrEmail(String login) {
+        User user = null;
+        try {
+            callSP = conexionDB.getConnection().prepareCall("{call sp_find_user_by_login(?)}");
+            callSP.setString(1, login);
+            ResultSet rs = callSP.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setName(rs.getString("name"));
+                user.setLastname(rs.getString("lastname"));
+                user.setEmail(rs.getString("email"));
+                user.setUser(rs.getString("user"));
+                user.setPassword(rs.getString("password"));
+                user.setIdUser(rs.getString("id_user"));
+            }
+            rs.close();
+            callSP.close();
+        } catch (SQLException e) {
+            System.out.println("Error al buscar usuario repository");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
     }
 }

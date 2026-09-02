@@ -30,3 +30,10 @@ delimiter ;
 call sp_create_users ("a","a","a@","a","a123");
 
 select*from Users;
+
+delimiter $$
+create procedure sp_find_user_by_login (in login_P varchar(50))
+begin
+	select * from Users where email = login_P or user = login_P;
+end $$
+delimiter ;
